@@ -1,6 +1,8 @@
-<div *ngIf="allBooks.length > 0">
+<div *ngIf="allBooks.length > 0" >
+  <button  routerLink="" (click)="Reset()">Home</button>
   <front-end-internship-assignment-table-view
   [booksList]="allBooks"
   [subjectName]="subjectName"
+  [parentIdentifier] = "id"
   ></front-end-internship-assignment-table-view>
 </div>

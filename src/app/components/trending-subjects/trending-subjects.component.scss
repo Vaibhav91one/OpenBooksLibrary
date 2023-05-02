@@ -1,0 +1,22 @@
+button{
+    margin: 1rem;
+    padding: 1rem;
+    background-color: black;
+    border: 1px solid rgb(211, 73, 211);
+    border-radius: 10px;
+    color: rgb(211, 73, 211);
+    transition: all .4s ease-in-out;
+    margin-bottom:3rem;
+    margin-top: 2rem;
+}
+
+button:hover{
+    box-shadow: 2px -1px 24px 0px rgba(211,73,211,0.75);
+    transform: scale(1.1) translate(5px, 5px);
+}
+
+div{
+    margin-left: 7rem;
+    margin-bottom: 4rem ;
+}
+

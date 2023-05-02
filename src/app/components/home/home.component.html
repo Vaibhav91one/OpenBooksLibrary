@@ -1,23 +1,26 @@
 <div class="header">
-  <div class="tw-text-24-px tw-font-600">Open Books Library</div>
+  <img src="../../../assets/coffee.png" class="title-image" alt="">
+  <div class="tw-text-24-px tw-font-600" id="title">
+    Open Books Library</div>
   <div class="search-button">
-    <mat-icon class="tw-mt-16-px" aria-label="Search Icon">search</mat-icon>
-    <input
-      [formControl]="bookSearch"
-      name="searchKey"
-      type="text"
-      placeholder="Search Books"
-      class="tw-border-0 tw-bg-inherit"
-    >
+    <!-- <mat-icon class="tw-mt-16-px" id='search-icon' aria-label="Search Icon">search</mat-icon> -->
+    <input [formControl]="bookSearch" id="search-bar" name="searchKey" type="text" placeholder="Search Books.."
+      class="tw-bg-inherit" [(ngModel)]="data" (change)="updateSharedData($any($event.target).value)">
   </div>
 </div>
-<div class="tw-flex tw-flex-row tw-m-24-px">
+<div class="main-wrapper">
   <section class="trending-subjects">
-    <div class="tw-font-600 tw-text-24-px">Trending Subjects</div>
+    <div class="tw-font-600 tw-text-24-px  " id="trending-title">
+      <img src="../../../assets/arrow-up.png" class="trending-image" alt="">
+      Trending Subjects
+    </div>
     <ul class="tw-list-none tw-pl-0">
-      <li class="tw-text-16-px tw-cursor-pointer tw-p-12-px" *ngFor="let subject of trendingSubjects" routerLink="/trending-subject/{{ subject.name }}">
+      <li class="tw-text-16-px tw-cursor-pointer tw-p-12-px" id="trending-topics"
+        *ngFor="let subject of trendingSubjects" (click)="trendingsubject(subject.name)">
         {{ subject.name }}
       </li>
     </ul>
+  </section>
+  <section class="table"><front-end-internship-assignment-table-view></front-end-internship-assignment-table-view>
   </section>
 </div>

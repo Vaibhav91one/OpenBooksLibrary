@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , Input} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { debounceTime, filter } from 'rxjs';
+import { SubjectsService } from 'src/app/core/services/subjects.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'front-end-internship-assignment-home',
@@ -9,8 +12,9 @@ import { debounceTime, filter } from 'rxjs';
 })
 export class HomeComponent implements OnInit {
   bookSearch: FormControl;
+  data: string = '';
 
-  constructor() {
+  constructor(private subjectservice: SubjectsService, private router: Router) {
     this.bookSearch = new FormControl('');
   }
 
@@ -20,8 +24,23 @@ export class HomeComponent implements OnInit {
     { name: 'HTML' },
     { name: 'Harry Potter' },
     { name: 'Crypto' },
+    { name: 'Python' },
+    { name: 'Java' },
+    { name: 'Blockchain' },
   ];
+  
+  updateSharedData(query: string) {
+    this.data = query
+    this.subjectservice.setSharedData(this.data);
+  }
 
+  trendingsubject(query: string) {
+    this.data = query
+    this.subjectservice.setSharedData(this.data);     
+    this.router.navigate([`trending-subject/:this.data`]);
+    
+  }
+ 
   ngOnInit(): void {
     this.bookSearch.valueChanges
       .pipe(
@@ -30,4 +49,6 @@ export class HomeComponent implements OnInit {
       subscribe((value: string) => {
       });
   }
+
+  
 }

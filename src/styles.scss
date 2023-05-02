@@ -6,24 +6,33 @@
 @tailwind utilities;
 
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+@import url("https://fonts.googleapis.com/css2?family=Bungee+Inline&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bayon&display=swap");
 
 *,
 html,
 body {
-  @apply
-  tw-font-activ-grotisk
+  @apply tw-font-activ-grotisk
   tw-text-14-px
   tw-box-border
   tw-antialiased;
+  font-family: Monaco, Consolas, "Lucida Console", monospace;
 }
 
 html,
 body {
-  @apply tw-h-full tw-w-full
+  @apply tw-h-full tw-w-full;
+  // background-color: white;
+  background-color: black;
+  background-image: url(./assets/pexels-alex-conchillos-3648850.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
+ 
+
 body {
-  @apply tw-m-0 tw-p-0
+  @apply tw-m-0 tw-p-0;
 }
 
 table {
@@ -31,4 +40,9 @@ table {
   th {
     padding-left: 16px;
   }
+}
+
+header {
+  background-color: black;
+  position: fixed;
 }

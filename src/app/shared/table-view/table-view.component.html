@@ -1,8 +1,9 @@
+<div *ngIf="isSearching" class="loading-screen">
+  <div class="spinner"></div>
+</div>
 <div class="tw-m-24-px">
-  <div class="tw-mb-24-px tw-text-24-px"> Top {{ booksList.length }} book{{ booksList.length > 1 ? "s" : "" }} on {{ subjectName }}</div>
-
-  <ng-container>
-    <table class="table-view">
+  <ng-container *ngIf="booksList.length > 0 ">
+    <table class="table-view" *ngIf="!isSearching && booksList.length > 0">
       <thead>
         <tr class="table-row">
           <th class="header">Title and Sub Title</th>
@@ -13,14 +14,50 @@
       <tbody class="table-body">
         <tr *ngFor="let book of booksList" class="row-data">
           <td>
-            <a class="tw-no-underline" href="https://openlibrary.org{{ book.key }}" target="_blank">{{ book.title }}</a>
+            <a class="tw-no-underline" id="title-book" href="https://openlibrary.org{{ book.key }}" target="_blank">{{
+              book.title }}</a>
           </td>
           <td>
             {{ book.authors.length > 0 ? book.authors[0].name : "Unknown" }}
           </td>
-          <td>{{ book.first_publish_year }}</td>
+          <td>{{ book.first_publish_year ? book.first_publish_year : "Unknown"}} </td>
         </tr>
       </tbody>
     </table>
+    <nav aria-label="Page navigation">
+      <ul class="pagination">
+        <li class="page-item">
+          <a class="page-link" [class.disabled]="currentPage == 1 " href="#" (click)="onFirstPage($event)">First</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" [class.disabled]="currentPage <= 1" href="#" (click)="onPrevPage($event)">Previous</a>
+        </li>
+
+        <li class="page-item">
+          <div class="input">
+            <input class="page-input" [disabled]="currentPage <= 0 || currentPage > 999 " placeholder={{currentPage}}
+              type="number" min="1" max="100" required pattern="[0-9]+"
+              (change)="onJumpPage($any($event.target).value)">/   {{totalPages}}
+          </div>
+        </li>
+
+        <li class="page-item">
+          <a class="page-link" href="#" [class.disabled]="currentPage === totalPages "
+            (click)="onNextPage($event)">Next</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#" [class.disabled]="currentPage === totalPages "
+            (click)="onLastPage($event)">Last</a>
+        </li>
+      </ul>
+    </nav>
   </ng-container>
+  <div *ngIf=" !isSearching && booksList.length <= 0 && !NoResultsFound" class="Search-home">
+    <p> Search to find books </p> <img src="../../../assets/cloud.png
+    " alt="">
+  </div>
+  <div *ngIf=" !isSearching && booksList.length <= 0 && NoResultsFound" class="Search-not-found">
+    <p> No Books Found </p> <img src="../../../assets/oops.png
+    " alt="">
+  </div>
 </div>
